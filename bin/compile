@@ -30,7 +30,23 @@ install_system_deps() {
 	echo "Installing Playwright dependencies (env: PLAYWRIGHT_BUILDPACK_BROWSERS) for $SUPPORTED_BROWSERS."
 
 	if [[ "$SUPPORTED_BROWSERS" == *"chromium"* ]]; then
-		cat << EOF >>$build_tmpdir/Aptfile
+		if [ "$STACK" = "heroku-24" ]; then
+			cat << EOF >>$build_tmpdir/Aptfile
+# Chromium dependencies
+libnspr4
+libnss3
+libxss1
+libasound2t64
+fonts-noto-color-emoji
+libgbm1
+libatk-bridge2.0-0
+libxkbcommon0
+libxrandr2
+libatspi2.0-0
+libxshmfence-dev
+EOF
+		else
+			cat << EOF >>$build_tmpdir/Aptfile
 # Chromium dependencies
 libnspr4
 libnss3
@@ -44,6 +60,7 @@ libxrandr2
 libatspi2.0-0
 libxshmfence-dev
 EOF
+		fi
 	fi
 
 	if [[ "$SUPPORTED_BROWSERS" == *"firefox"* ]]; then
