@@ -175,7 +175,5 @@ if [ ! -d "$BUILD_DIR/node_modules" ]; then
     error "node_modules not found in $BUILD_DIR - Node.js buildpack must run first"
 fi
 
-echo "-----> Installing chromium with deps."
 mkdir -p $BUILD_DIR/.playwright-browsers
-PLAYWRIGHT_BROWSERS_PATH=$BUILD_DIR/.playwright-browsers npx playwright install chromium
-echo "-----> Installing chromium done."
+PLAYWRIGHT_BROWSERS_PATH=$BUILD_DIR/.playwright-browsers npx playwright install chrome-headless-shell
