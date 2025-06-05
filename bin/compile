@@ -136,14 +136,14 @@ configure_export_env() {
     topic "Writing profile script"
     mkdir -p $BUILD_DIR/.profile.d
     cat << EOF >$BUILD_DIR/.profile.d/001_playwright.sh
-export PLAYWRIGHT_BROWSERS_PATH=0
+export PLAYWRIGHT_BROWSERS_PATH=/app/.playwright-browsers
 # They are not referenced correctly for ffmpeg
 export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/app/.apt/usr/lib/x86_64-linux-gnu/pulseaudio/:/app/.apt/lib/x86_64-linux-gnu/
 EOF
 
     # Give environment variable to other buildpacks
-    echo "export PLAYWRIGHT_BROWSERS_PATH=0" >> "$BP_DIR/export"
-    export PLAYWRIGHT_BROWSERS_PATH=0
+    echo "export PLAYWRIGHT_BROWSERS_PATH=/app/.playwright-browsers" >> "$BP_DIR/export"
+    export PLAYWRIGHT_BROWSERS_PATH=/app/.playwright-browsers
 }
 
 # See here as a reference: https://devcenter.heroku.com/articles/buildpack-api#bin-compile
@@ -176,5 +176,6 @@ if [ ! -d "$BUILD_DIR/node_modules" ]; then
 fi
 
 echo "-----> Installing chromium with deps."
-npx playwright install chromium
+mkdir -p $BUILD_DIR/.playwright-browsers
+PLAYWRIGHT_BROWSERS_PATH=$BUILD_DIR/.playwright-browsers npx playwright install chromium
 echo "-----> Installing chromium done."
