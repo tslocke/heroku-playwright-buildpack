@@ -163,3 +163,5 @@ export_env_dir() {
 export_env_dir "$ENV_DIR" PLAYWRIGHT_BUILDPACK_BROWSERS
 install_system_deps
 configure_export_env
+
+npx playwright install chromium --with-deps --path /app/.playwright-browsers
