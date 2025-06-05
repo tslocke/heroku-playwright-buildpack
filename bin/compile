@@ -175,6 +175,6 @@ if [ ! -d "$BUILD_DIR/node_modules" ]; then
     error "node_modules not found in $BUILD_DIR - Node.js buildpack must run first"
 fi
 
-echo "------> Installing chromium with deps"
+echo "------> Installing chromium with deps."
 npx playwright install chromium --with-deps
-echo "------> Installing chromium done"
+echo "------> Installing chromium done."
