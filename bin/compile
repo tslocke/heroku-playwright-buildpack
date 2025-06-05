@@ -164,4 +164,17 @@ export_env_dir "$ENV_DIR" PLAYWRIGHT_BUILDPACK_BROWSERS
 install_system_deps
 configure_export_env
 
-npx playwright install chromium --with-deps --path /app/.playwright-browsers
+topic "Installing Playwright browser binaries"
+cd $BUILD_DIR
+if [ ! -d "$BUILD_DIR" ]; then
+    error "BUILD_DIR $BUILD_DIR does not exist"
+fi
+
+# Make sure we're in the right directory and node_modules exists
+if [ ! -d "$BUILD_DIR/node_modules" ]; then
+    error "node_modules not found in $BUILD_DIR - Node.js buildpack must run first"
+fi
+
+echo "------> Installing chromium with deps"
+npx playwright install chromium --with-deps
+echo "------> Installing chromium done"
