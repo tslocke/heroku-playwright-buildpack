@@ -161,7 +161,7 @@ export_env_dir() {
 }
 
 export_env_dir "$ENV_DIR" PLAYWRIGHT_BUILDPACK_BROWSERS
-install_system_deps
+# install_system_deps
 configure_export_env
 
 topic "Installing Playwright browser binaries"
@@ -176,4 +176,4 @@ if [ ! -d "$BUILD_DIR/node_modules" ]; then
 fi
 
 mkdir -p $BUILD_DIR/.playwright-browsers
-PLAYWRIGHT_BROWSERS_PATH=$BUILD_DIR/.playwright-browsers npx playwright install chromium
+PLAYWRIGHT_BROWSERS_PATH=$BUILD_DIR/.playwright-browsers npx playwright install chromium --install-deps
