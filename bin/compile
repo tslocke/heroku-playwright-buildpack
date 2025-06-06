@@ -181,4 +181,4 @@ fi
 
 mkdir -p $BUILD_DIR/.playwright-browsers
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu:$BUILD_DIR/.apt/lib/x86_64-linux-gnu
-PLAYWRIGHT_BROWSERS_PATH=$BUILD_DIR/.playwright-browsers npx playwright install chromium --no-shell
+PLAYWRIGHT_BROWSERS_PATH=$BUILD_DIR/.playwright-browsers npx playwright install chromium
