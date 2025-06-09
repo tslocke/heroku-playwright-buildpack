@@ -3,6 +3,7 @@
 set -e
 
 cd /app
+yarn run playwright install --dry-run chromium
 CHROMIUM_PATH=$(yarn run playwright install --dry-run chromium | grep 'chromium-[0-9]' | awk '/Install location/ {print $3}')
 mkdir -p \"$CHROMIUM_PATH/chrome-linux\"
 ln -sf $PLAYWRIGHT_BROWSERS_PATH/chrome-linux64/chrome $CHROMIUM_PATH/chrome-linux/chrome
