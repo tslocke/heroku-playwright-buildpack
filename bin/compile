@@ -2,7 +2,12 @@
 
 set -e
 
-cd /app
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+BP_DIR=`cd $(dirname $0); cd ..; pwd`
+
+cd $BUILD_DIR
 yarn run playwright install --dry-run chromium
 CHROMIUM_PATH=$(yarn run playwright install --dry-run chromium | grep 'chromium-[0-9]' | awk '/Install location/ {print $3}')
 mkdir -p \"$CHROMIUM_PATH/chrome-linux\"
