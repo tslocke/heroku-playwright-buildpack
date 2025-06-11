@@ -18,5 +18,14 @@ echo BUILD_DIR: $BUILD_DIR
 echo CHROMIUM_PATH: $CHROMIUM_PATH
 echo PLAYWRIGHT_BROWSERS_PATH: $PLAYWRIGHT_BROWSERS_PATH
 
-# mkdir -p \"$CHROMIUM_PATH/chrome-linux\"
-# ln -sf $(echo $PLAYWRIGHT_BROWSERS_PATH/chrome-linux64/chrome | sed "s|/app|$BUILD_PATH|g") $(echo $CHROMIUM_PATH/chrome-linux/chrome | sed "s|/app|$BUILD_PATH|g")
+echo Binary at $PLAYWRIGHT_BROWSERS_PATH/chrome-linux64/chrome ?
+file $PLAYWRIGHT_BROWSERS_PATH/chrome-linux64/chrome
+
+mkdir -p \"$CHROMIUM_PATH/chrome-linux\"
+
+REAL_CHROME_BINARY $PLAYWRIGHT_BROWSERS_PATH/chrome-linux64/chrome
+EXPECTED_CHROME_BINARY from $CHROMIUM_PATH/chrome-linux/chrome
+
+ln -s $REAL_CHROME_BINARY $EXPECTED_CHROME_BINARY
+
+# CHROMIUM_PATH=$(pnpm playwright install --dry-run chromium | awk '/Install location/ {print $3}'); mkdir -p \"$CHROMIUM_PATH/chrome-linux\"; ln -s $PLAYWRIGHT_BROWSERS_PATH/chrome-linux64/chrome $CHROMIUM_PATH/chrome-linux/chrome"
