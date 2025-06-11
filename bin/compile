@@ -8,6 +8,9 @@ ENV_DIR=$3
 BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 cd $BUILD_DIR
+
+export PLAYWRIGHT_BROWSERS_PATH="$BUILD_DIR/.playwright-browsers"
+
 yarn run playwright install --dry-run chromium
 CHROMIUM_PATH=$(yarn run playwright install --dry-run chromium | grep 'chromium-[0-9]' | awk '/Install location/ {print $3}')
 
