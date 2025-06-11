@@ -9,11 +9,12 @@ BP_DIR=`cd $(dirname $0); cd ..; pwd`
 
 cd $BUILD_DIR
 
-export PLAYWRIGHT_BROWSERS_PATH="$BUILD_DIR/.playwright-browsers"
 INSTALLED_CHROME_PATH=$BUILD_DIR/.chrome-for-testing/chrome-linux64/chrome
 echo Chrome installed?
 file $INSTALLED_CHROME_PATH
 
+# Use playwright install --dry-run to figure out where Playwright will expect chrome to be
+export PLAYWRIGHT_BROWSERS_PATH="$BUILD_DIR/.playwright-browsers"
 yarn run playwright install --dry-run chromium
 EXPECTED_CHROMIUM_DIR=$(yarn run playwright install --dry-run chromium | grep 'chromium-[0-9]' | awk '/Install location/ {print $3}')
 
@@ -21,7 +22,7 @@ echo BUILD_DIR: $BUILD_DIR
 echo EXPECTED_CHROMIUM_DIR: $EXPECTED_CHROMIUM_DIR
 echo INSTALLED_CHROME_PATH: $INSTALLED_CHROME_PATH
 
-mkdir -p \"$EXPECTED_CHROMIUM_DIR/chrome-linux\"
+mkdir -p $EXPECTED_CHROMIUM_DIR/chrome-linux
 
 EXPECTED_CHROME_PATH=$EXPECTED_CHROMIUM_DIR/chrome-linux/chrome
 
