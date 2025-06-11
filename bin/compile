@@ -13,6 +13,7 @@ CHROMIUM_PATH=$(yarn run playwright install --dry-run chromium | grep 'chromium-
 
 echo BUILD_DIR: $BUILD_DIR
 echo CHROMIUM_PATH: $CHROMIUM_PATH
+echo PLAYWRIGHT_BROWSERS_PATH: $PLAYWRIGHT_BROWSERS_PATH
 
 # mkdir -p \"$CHROMIUM_PATH/chrome-linux\"
 # ln -sf $(echo $PLAYWRIGHT_BROWSERS_PATH/chrome-linux64/chrome | sed "s|/app|$BUILD_PATH|g") $(echo $CHROMIUM_PATH/chrome-linux/chrome | sed "s|/app|$BUILD_PATH|g")
