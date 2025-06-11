@@ -17,7 +17,7 @@ file $INSTALLED_CHROME_PATH
 export PLAYWRIGHT_BROWSERS_PATH="$BUILD_DIR/.playwright-browsers"
 yarn run playwright install --dry-run chromium
 EXPECTED_CHROMIUM_BASE=$(yarn run playwright install --dry-run chromium | grep 'chromium-[0-9]' | awk '/Install location/ {print $3}')
-EXPECTED_CHROMIUM_DIR=$EXPECTED_CHROME_BASE/chrome-linux
+EXPECTED_CHROMIUM_DIR=$EXPECTED_CHROMIUM_BASE/chrome-linux
 
 echo BUILD_DIR: $BUILD_DIR
 echo EXPECTED_CHROMIUM_DIR: $EXPECTED_CHROMIUM_DIR
