@@ -24,6 +24,6 @@ echo EXPECTED_CHROMIUM_DIR: $EXPECTED_CHROMIUM_DIR
 echo INSTALLED_CHROME_PATH: $INSTALLED_CHROME_PATH
 
 mkdir -p $EXPECTED_CHROMIUM_DIR
-ln -s $INSTALLED_CHROME_PATH $EXPECTED_CHROMIUM_DIR/chrome
+ln -s /app/.chrome-for-testing/chrome-linux64/chrome $EXPECTED_CHROMIUM_DIR/chrome
 
 # CHROMIUM_PATH=$(pnpm playwright install --dry-run chromium | awk '/Install location/ {print $3}'); mkdir -p \"$CHROMIUM_PATH/chrome-linux\"; ln -s $PLAYWRIGHT_BROWSERS_PATH/chrome-linux64/chrome $CHROMIUM_PATH/chrome-linux/chrome"
